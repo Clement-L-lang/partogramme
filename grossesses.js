@@ -1,8 +1,9 @@
+// specialite = valeur exacte de l'enum Postgres ; titre = libelle affiche a l'utilisateur.
 const ROLES = [
-  { champ: "id_sage_femme", specialite: "Sage-femme" },
-  { champ: "id_obstetricien", specialite: "Obstétricien" },
-  { champ: "id_anesthesiste", specialite: "Anesthésiste" },
-  { champ: "id_pediatre", specialite: "Pédiatre" },
+  { champ: "id_sage_femme", specialite: "SF", titre: "Sage-femme" },
+  { champ: "id_obstetricien", specialite: "Obstetricien", titre: "Obstétricien" },
+  { champ: "id_anesthesite", specialite: "Anest", titre: "Anesthésiste" },
+  { champ: "id_pediatre", specialite: "Pediatre", titre: "Pédiatre" },
 ];
 
 const choixPatiente = document.getElementById("choix-patiente");
@@ -148,6 +149,18 @@ function versTexteBool(valeur) {
   return valeur === null || valeur === undefined ? "" : String(valeur);
 }
 
+// Les durees sont stockees en heures (nombres). On accepte aussi l'ancien texte "HH:MM".
+function dureePourSaisie(temps) {
+  if (temps === null || temps === undefined) return "";
+  if (typeof temps === "number") return String(temps);
+  return String(temps).slice(0, 5);
+}
+
+function dureeOuNull(id) {
+  const v = document.getElementById(id).value.trim();
+  return v === "" ? null : Number(v);
+}
+
 function ouvrirFormulaireGrossesse(grossesse) {
   idGrossesseEnEdition = grossesse ? grossesse.id_grossesse : null;
   titreGrossesse.textContent = grossesse
@@ -158,8 +171,8 @@ function ouvrirFormulaireGrossesse(grossesse) {
   document.getElementById("g_parite").value = grossesse?.parite ?? "";
   document.getElementById("g_hiv").value = versTexteBool(grossesse?.hiv);
   document.getElementById("g_toxo").value = versTexteBool(grossesse?.toxo);
-  document.getElementById("g_duree_travail").value = grossesse?.duree_travail?.slice(0, 5) ?? "";
-  document.getElementById("g_duree_expulsion").value = grossesse?.duree_expulsion?.slice(0, 5) ?? "";
+  document.getElementById("g_duree_travail").value = dureePourSaisie(grossesse?.duree_travail);
+  document.getElementById("g_duree_expulsion").value = dureePourSaisie(grossesse?.duree_expulsion);
   for (const { champ } of ROLES) {
     document.getElementById("g_" + champ).value = grossesse?.[champ] == null ? "" : String(grossesse[champ]);
   }
@@ -189,8 +202,8 @@ formulaireGrossesse.addEventListener("submit", async (evenement) => {
     parite: parite === null ? null : Number(parite),
     hiv: texteOuNull("g_hiv") === null ? null : document.getElementById("g_hiv").value === "true",
     toxo: texteOuNull("g_toxo") === null ? null : document.getElementById("g_toxo").value === "true",
-    duree_travail: texteOuNull("g_duree_travail"),
-    duree_expulsion: texteOuNull("g_duree_expulsion"),
+    duree_travail: dureeOuNull("g_duree_travail"),
+    duree_expulsion: dureeOuNull("g_duree_expulsion"),
   };
   for (const { champ } of ROLES) {
     const v = texteOuNull("g_" + champ);

@@ -67,7 +67,7 @@ async function exporterExcel() {
       ["Toxoplasmose", texteResultat(grossesse.toxo)],
       ["Durée du travail", texteDuree(grossesse.duree_travail)],
       ["Durée de l'expulsion", texteDuree(grossesse.duree_expulsion)],
-      ...ROLES.map((r) => [r.specialite, nomPraticien(grossesse[r.champ])]),
+      ...ROLES.map((r) => [r.titre, nomPraticien(grossesse[r.champ])]),
     ];
     let ligne = 3;
     for (const [libelle, valeur] of infos) {

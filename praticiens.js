@@ -9,7 +9,7 @@ const prSpecialite = document.getElementById("pr_specialite");
 
 let idPraticienEnEdition = null;
 
-for (const { specialite } of ROLES) prSpecialite.append(new Option(specialite, specialite));
+for (const { specialite, titre } of ROLES) prSpecialite.append(new Option(titre, specialite));
 
 async function chargerPagePraticiens() {
   fermerFormulairePraticien();

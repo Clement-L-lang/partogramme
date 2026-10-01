@@ -235,11 +235,11 @@
                 <option value="true">positif</option>
               </select>
             </label>
-            <label>Durée du travail (h:min)
-              <input type="time" id="g_duree_travail">
+            <label>Durée du travail (heures)
+              <input type="number" min="0" step="1" id="g_duree_travail">
             </label>
-            <label>Durée de l'expulsion (h:min)
-              <input type="time" id="g_duree_expulsion">
+            <label>Durée de l'expulsion (heures)
+              <input type="number" min="0" step="1" id="g_duree_expulsion">
             </label>
           </div>
           <h3 class="sous-titre">Équipe référente</h3>
@@ -251,7 +251,7 @@
               <select id="g_id_obstetricien"></select>
             </label>
             <label>Anesthésiste
-              <select id="g_id_anesthesiste"></select>
+              <select id="g_id_anesthesite"></select>
             </label>
             <label>Pédiatre
               <select id="g_id_pediatre"></select>

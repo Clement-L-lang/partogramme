@@ -125,7 +125,7 @@ function afficherFiche() {
     const nom = document.createElement("strong");
     nom.textContent = `${praticien.prenom ?? ""} ${praticien.nom ?? ""}`.trim();
     const fonction = document.createElement("span");
-    fonction.textContent = role.specialite;
+    fonction.textContent = role.titre;
     texte.append(nom, fonction);
     li.append(avatar, texte);
     listeEquipe.append(li);
