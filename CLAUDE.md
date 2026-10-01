@@ -20,6 +20,17 @@ Le rendu attendu est la maquette `maquette.png`.
   l'utilisateur le 01/10/2026, décision en attente : l'activer exigera d'ajouter des règles
   d'accès en même temps, sinon le site ne pourra plus lire les enfants).
 
+## Mise en ligne
+
+- Dépôt GitHub public : https://github.com/Clement-L-lang/partogramme (compte `Clement-L-lang`).
+- Publier = `git add` + `git commit` + `git push` : le workflow `.github/workflows/deploy.yml`
+  met le site en ligne sur https://sps-g20-parto.professeurpetitchat.com/ (premier déploiement
+  réussi le 01/10/2026, vérifié dans le navigateur).
+- `gh` se connecte au compte via `gh auth login` (méthode code d'appareil, jeton stocké dans le
+  trousseau). Attention sur ce PC : passer le jeton par le pipe PowerShell (`Get-Content | gh auth
+  login --with-token`) échoue avec « Bad credentials » ; utiliser `cmd /c "gh auth login -h
+  github.com --with-token < %TEMP%\jeton.txt"`.
+
 ## Lancer le site en local
 
 - Python n'est PAS installé sur ce PC (`python -m http.server` échoue), et `npx` est bloqué
